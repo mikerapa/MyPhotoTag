@@ -46,12 +46,12 @@ func createCombinedImage(photoJpg image.Image, tagPng image.Image) *image.RGBA {
 	tagBounds := tagPng.Bounds()
 	image3 := image.NewRGBA(photoBounds)
 	draw.Draw(image3, photoBounds, photoJpg, image.ZP, draw.Src)
-	offset := calculateTagCoordinate(photoBounds, tagBounds)
+	offset := CalculateTagCoordinate(photoBounds, tagBounds)
 	draw.Draw(image3, tagPng.Bounds().Add(offset), tagPng, image.ZP, draw.Over)
 	return image3
 }
 
-func calculateTagCoordinate(photoBounds image.Rectangle, tagBounds image.Rectangle) (destinationPoint image.Point) {
+func CalculateTagCoordinate(photoBounds image.Rectangle, tagBounds image.Rectangle) (destinationPoint image.Point) {
 	cli.ConsoleLogger.Trace("Calculating tag location")
 	if tagBounds.Dx() > photoBounds.Dx() || tagBounds.Dy() > photoBounds.Dy() {
 		cli.ConsoleLogger.Error("Tag dimensions are greater than photo dimensions. The tag will be located in the upper left position.")
