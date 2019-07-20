@@ -9,7 +9,7 @@ func main() {
 	// set up the console logger with a default value
 	cli.InitLogger("Error")
 
-	photoFilePath, tagFilePath, outputFilePath := cli.ParseCommandParameters()
+	photoFilePath, tagFilePath, outputFilePath := cli.ParseCommandLine()
 	photo.TagPhoto(photoFilePath, tagFilePath, outputFilePath)
 
 }
