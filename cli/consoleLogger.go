@@ -23,7 +23,6 @@ func (f *myFormatter) Format(entry *logrus.Entry) ([]byte, error) {
 	byteBuffer := &bytes.Buffer{}
 	byteBuffer.WriteString(formattedLogEntry)
 	return byteBuffer.Bytes(), nil
-
 }
 
 func getFormatter() logrus.Formatter {

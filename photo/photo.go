@@ -1,8 +1,8 @@
 package photo
 
 import (
-	"../cli"
 	"fmt"
+	"github.com/mikerapa/MyPhotoTag/cli"
 	"image"
 	"image/draw"
 	"image/jpeg"

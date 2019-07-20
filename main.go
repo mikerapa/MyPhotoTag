@@ -1,8 +1,8 @@
 package main
 
 import (
-	"./cli"
-	"./photo"
+	"github.com/mikerapa/MyPhotoTag/cli"
+	"github.com/mikerapa/MyPhotoTag/photo"
 )
 
 func main() {
