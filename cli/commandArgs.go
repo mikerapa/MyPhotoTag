@@ -16,9 +16,9 @@ func ParseCommandLine() (string, string, string) {
 	kingpin.Parse()
 
 	ConsoleLogger.Level = GetLogLevelFromString(*logLevelString)
-	ConsoleLogger.Info("Command Argument photoPath: ", photoFilePath)
-	ConsoleLogger.Info("Command Argument tagPath: ", tagFilePath)
-	ConsoleLogger.Info("Command Argument outputFilePath: ", outputPhotoPath)
+	ConsoleLogger.Info("Command Argument photoPath: ", *photoFilePath)
+	ConsoleLogger.Info("Command Argument tagPath: ", *tagFilePath)
+	ConsoleLogger.Info("Command Argument outputFilePath: ", *outputPhotoPath)
 	ConsoleLogger.Trace("Done parsing command line arguments")
 
 	return *photoFilePath, *tagFilePath, *outputPhotoPath
