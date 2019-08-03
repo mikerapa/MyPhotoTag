@@ -62,11 +62,3 @@ func CalculateTagCoordinate(photoBounds image.Rectangle, tagBounds image.Rectang
 	cli.ConsoleLogger.Infof("Tag location: %v", destinationPoint)
 	return
 }
-
-func openImageFile(imageFilePath string) (openedFile *os.File) {
-	openedFile, err := os.Open(imageFilePath)
-	if err != nil {
-		cli.ConsoleLogger.Fatalf("failed to open: %s", err)
-	}
-	return
-}

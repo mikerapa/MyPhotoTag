@@ -31,6 +31,7 @@ func getFormatter() logrus.Formatter {
 	return formatter
 }
 
+// Set up the logger instance for use
 func InitLogger(logLevelString string) {
 	ConsoleLogger = GetLogger(GetLogLevelFromString(logLevelString))
 }

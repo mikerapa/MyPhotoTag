@@ -10,6 +10,13 @@ func main() {
 	cli.InitLogger("Error")
 
 	photoFilePath, tagFilePath, outputFilePath := cli.ParseCommandLine()
+
+	// Make sure there is a valid outputPhotoPath
+	if outputFilePath == "" {
+		outputFilePath = photo.DeriveOutputFilePath(photoFilePath)
+		cli.ConsoleLogger.Infof("Output path was not specified. Using %s as output path for tagged photo.", outputFilePath)
+	}
+
 	photo.TagPhoto(photoFilePath, tagFilePath, outputFilePath)
 
 }
