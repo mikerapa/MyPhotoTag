@@ -7,8 +7,7 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	// call flag.Parse() here if TestMain uses flags
-	// TODO move this to a common location
+	// call InitLogger before running this test
 	InitLogger("Error")
 	os.Exit(m.Run())
 }
@@ -23,8 +22,9 @@ func TestParseCommandLine(t *testing.T) {
 		wantErr             bool
 	}{
 		{"no input", "", "", "", "", true},
-		//{"all input", `-p images/kid.jpg -t images/tag.png -o images/taggedLuca.jpg -l Trace`, `images/kig.jpg`, `images/tag.png`, `images/taggedLuca.jpg`, false},
 		{"all input", "-p images/kid.jpg -t images/tag.png -o images/taggedLuca.jpg -l Trace", "images/kid.jpg", "images/tag.png", "images/taggedLuca.jpg", false},
+		{"no output file", "-p images/kid.jpg -t images/tag.png -l Trace", "images/kid.jpg", "images/tag.png", "", false},
+		{"all input with long names", "--photoPath images/kid.jpg --tagPath images/tag.png -o images/taggedLuca.jpg -l Trace", "images/kid.jpg", "images/tag.png", "images/taggedLuca.jpg", false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
