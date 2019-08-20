@@ -6,30 +6,23 @@ import (
 	"image"
 	"image/draw"
 	"image/jpeg"
-	"image/png"
 	"os"
 )
 
 func TagPhoto(photoFilePath string, tagFilePath string, outputFilePath string) {
 	cli.ConsoleLogger.Trace("Tagging photo:", photoFilePath)
 
-	image1 := openImageFile(photoFilePath)
-	defer image1.Close()
-
-	tagImage := openImageFile(tagFilePath)
-	defer tagImage.Close()
-
-	photoJpg, err := jpeg.Decode(image1)
+	origPhoto, _, err := DecodeImageFile(photoFilePath)
 	if err != nil {
-		cli.ConsoleLogger.Fatalf("failed to decode jpeg file: %s", err)
+		cli.ConsoleLogger.Fatalf("Failed to open and decode file: %s", err)
 	}
 
-	tagPng, err := png.Decode(tagImage)
+	tagImage, _, err := DecodeImageFile(tagFilePath)
 	if err != nil {
-		cli.ConsoleLogger.Fatalf("Failed to decode png file: %s", err)
+		cli.ConsoleLogger.Fatal("Failed to open and decode file: ", tagFilePath, " Error: ", err)
 	}
 
-	image3 := createCombinedImage(photoJpg, tagPng)
+	image3 := createCombinedImage(origPhoto, tagImage)
 
 	third, err := os.Create(outputFilePath)
 	if err != nil {

@@ -1,8 +1,12 @@
 package photo
 
 import (
+	"bufio"
 	"github.com/mikerapa/MyPhotoTag/cli"
 	"github.com/sirupsen/logrus"
+	"image"
+	_ "image/jpeg"
+	_ "image/png"
 	"os"
 	"path"
 	"path/filepath"
@@ -11,16 +15,14 @@ import (
 
 const taggedString = "(tagged)"
 
-func openImageFile(imageFilePath string) (openedFile *os.File) {
-	openedFile, err := os.Open(imageFilePath)
+func DecodeImageFile(filePath string) (image.Image, string, error) {
+	f, err := os.Open(filePath)
 	if err != nil {
-		// If the file open failed, try to log the application path as well.
-		applicationPath, _ := filepath.Abs(os.Args[0])
-		absoluteFilePath, _ := filepath.Abs(imageFilePath)
-		cli.ConsoleLogger.Infof("Current application path: %s", applicationPath)
-		cli.ConsoleLogger.Fatalf("failed to open: %s. Absolute path: %s.", err, absoluteFilePath)
+		cli.ConsoleLogger.Errorf("Unable to open file %s", filePath)
+		return nil, "", err
 	}
-	return
+	defer f.Close()
+	return image.Decode(bufio.NewReader(f))
 }
 
 func DeriveOutputFilePath(photoFilePath string) (outputFilePath string) {
