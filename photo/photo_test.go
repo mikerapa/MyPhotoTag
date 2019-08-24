@@ -36,46 +36,6 @@ func Test_calculateTagCoordinate(t *testing.T) {
 
 }
 
-func TestDeriveOutputFilePath(t *testing.T) {
-	tests := []struct {
-		name               string
-		photoFilePath      string
-		wantOutputFilePath string
-	}{
-		{"simple path", "photos/luca.jpg", "photos/luca(tagged).jpg"},
-		{"Longer path", "/OtherFolder/photos/luca.jpg", "/OtherFolder/photos/luca(tagged).jpg"},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if gotOutputFilePath := DeriveOutputFilePath(tt.photoFilePath); gotOutputFilePath != tt.wantOutputFilePath {
-				t.Errorf("DeriveOutputFilePath() = %v, want %v", gotOutputFilePath, tt.wantOutputFilePath)
-			}
-		})
-	}
-}
-
-func TestIsMediaFile(t *testing.T) {
-	// Supported media ".gif", ".jpeg", ".png"
-	tests := []struct {
-		name string
-		path string
-		want bool
-	}{
-		{name: "jpg", path: "c:\\temp\\otherdir\\hang.jpg", want: true},
-		{name: "JPG in caps", path: "c:\\temp\\thingy.JPG", want: true},
-		{name: "png", path: "c:\\temp\\thingy.png", want: true},
-		{name: "gif", path: "c:\\temp\\thingy.gif", want: true},
-		{name: "xps", path: "c:\\temp\\thingy.xps", want: false},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := IsMediaFile(tt.path); got != tt.want {
-				t.Errorf("IsMediaFile() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
 func TestTagPhoto(t *testing.T) {
 	tests := []struct {
 		name           string

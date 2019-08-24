@@ -29,8 +29,7 @@ func TestParseCommandLine(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 
-			//_, _, _, err := ParseCommandLine(strings.Split(tt.argString, " "))
-			gotPhotoFilePath, gotTagFilePath, gotOutputPhotoPath, err := ParseCommandLine(strings.Split(tt.argString, " "))
+			gotPhotoFilePath, gotTagFilePath, gotOutputPath, err := ParseCommandLine(strings.Split(tt.argString, " "))
 			if (err != nil) != tt.wantErr {
 				t.Errorf("ParseCommandLine() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -41,8 +40,8 @@ func TestParseCommandLine(t *testing.T) {
 			if gotTagFilePath != tt.wantTagFilePath {
 				t.Errorf("ParseCommandLine() got1 = %v, want %v", gotTagFilePath, tt.wantTagFilePath)
 			}
-			if gotOutputPhotoPath != tt.wantOutputPhotoPath {
-				t.Errorf("ParseCommandLine() got2 = %v, want %v", gotOutputPhotoPath, tt.wantOutputPhotoPath)
+			if gotOutputPath != tt.wantOutputPhotoPath {
+				t.Errorf("ParseCommandLine() got2 = %v, want %v", gotOutputPath, tt.wantOutputPhotoPath)
 			}
 		})
 	}

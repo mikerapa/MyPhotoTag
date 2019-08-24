@@ -25,9 +25,10 @@ func DecodeImageFile(filePath string) (image.Image, string, error) {
 	return image.Decode(bufio.NewReader(f))
 }
 
-func DeriveOutputFilePath(photoFilePath string) (outputFilePath string) {
-	dir, fileName := filepath.Split(photoFilePath)
-	outputFilePath = filepath.Join(dir, strings.TrimSuffix(fileName, path.Ext(fileName))+taggedString+path.Ext(fileName))
+func GetOutputFilePath(outputPath string, photoFilePath string) (outputFilePath string) {
+	_, fileName := filepath.Split(photoFilePath)
+	ext := path.Ext(fileName)
+	outputFilePath = filepath.Join(outputPath, strings.TrimSuffix(fileName, ext)+taggedString+ext)
 	return
 }
 
